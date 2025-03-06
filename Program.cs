@@ -11,6 +11,11 @@ logger.Info("Program started");
 // deserialize mario json from file into List<Mario>
 string marioFileName = "mario.json";
 List<Mario> marios = [];
+string dkFileName = "dk.json";
+List<DonkeyKong> donkeyKongs = JsonSerializer.Deserialize<List<DonkeyKong>> (File.ReadAllText(dkFileName))!;
+string sf2FileName = "sf2.json";
+List<StreetFighterII> streetFighters = JsonSerializer.Deserialize<List<StreetFighterII>> (File.ReadAllText(sf2FileName))!;
+
 // check if file exists
 if (File.Exists(marioFileName))
 {
