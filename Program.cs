@@ -143,6 +143,19 @@ do
       donkeyKong.Name = Console.ReadLine();
       Console.WriteLine("Enter Description: ");
       donkeyKong.Description = Console.ReadLine();
+      // Input Alias
+      List<string> list = [];
+      do
+      {
+        Console.WriteLine($"Enter Alias or (enter) to quit:");
+        string response = Console.ReadLine()!;
+        if (string.IsNullOrEmpty(response))
+        {
+          break;
+        }
+        list.Add(response);
+      } while (true);
+      donkeyKong.Alias = list;
     }
     else if (choice == "3")
     {
@@ -211,6 +224,19 @@ do
       streetFighter.Description = Console.ReadLine();
       Console.WriteLine("Enter Moves separated by commas: ");
       streetFighter.Moves = Console.ReadLine();
+      // Input Alias
+      List<string> list = [];
+      do
+      {
+        Console.WriteLine($"Enter Alias or (enter) to quit:");
+        string response = Console.ReadLine()!;
+        if (string.IsNullOrEmpty(response))
+        {
+          break;
+        }
+        list.Add(response);
+      } while (true);
+      streetFighter.Alias = list;
     }
     else if (choice == "3")
     {
