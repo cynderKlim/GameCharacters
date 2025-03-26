@@ -17,10 +17,20 @@ string sf2FileName = "sf2.json";
 List<StreetFighterII> streetFighters = JsonSerializer.Deserialize<List<StreetFighterII>> (File.ReadAllText(sf2FileName))!;
 
 // check if file exists
-if (File.Exists(marioFileName))
+if (File.Exists(marioFileName) && File.Exists(dkFileName) && File.Exists(sf2FileName))
 {
   marios = JsonSerializer.Deserialize<List<Mario>>(File.ReadAllText(marioFileName))!;
   logger.Info($"File deserialized {marioFileName}");
+  donkeyKongs = JsonSerializer.Deserialize<List<DonkeyKong>>(File.ReadAllText(dkFileName))!;
+  logger.Info($"File deserialized {dkFileName}"); 
+  streetFighters = JsonSerializer.Deserialize<List<StreetFighterII>>(File.ReadAllText(sf2FileName))!;
+  logger.Info($"File deserialized {sf2FileName}");
+  // TODO: Modify the Game Characters assignment. Add menu option(s) to edit existing characters.
+
+// You will need to provide a way of locating the character to edit (similar to deleting a character)
+// You may find the FindIndex method useful
+// You can / should re-use the static method InputCharacter when editing characters (similar to adding a new character)
+// Make sure you serialize the list into the appropriate json file (similar to deleting a character)
 }
 
 do
