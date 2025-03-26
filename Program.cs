@@ -136,26 +136,7 @@ do
       {
         Id = donkeyKongs.Count == 0 ? 1 : donkeyKongs.Max(c => c.Id) + 1
       };
-      // Input Species, Name, Description
-      Console.WriteLine("Enter Species: ");
-      donkeyKong.Species = Console.ReadLine();
-      Console.WriteLine("Enter Name: ");
-      donkeyKong.Name = Console.ReadLine();
-      Console.WriteLine("Enter Description: ");
-      donkeyKong.Description = Console.ReadLine();
-      // Input Alias
-      List<string> list = [];
-      do
-      {
-        Console.WriteLine($"Enter Alias or (enter) to quit:");
-        string response = Console.ReadLine()!;
-        if (string.IsNullOrEmpty(response))
-        {
-          break;
-        }
-        list.Add(response);
-      } while (true);
-      donkeyKong.Alias = list;
+      InputCharacter(donkeyKong);
       // Add Character
       donkeyKongs.Add(donkeyKong);
       File.WriteAllText(dkFileName, JsonSerializer.Serialize(donkeyKongs));
@@ -221,26 +202,7 @@ do
       {
         Id = streetFighters.Count == 0 ? 1 : streetFighters.Max(c => c.Id) + 1
       };
-      // Input Name, Description
-      Console.WriteLine("Enter Name: ");
-      streetFighter.Name = Console.ReadLine();
-      Console.WriteLine("Enter Description: ");
-      streetFighter.Description = Console.ReadLine();
-      Console.WriteLine("Enter Moves separated by commas: ");
-      streetFighter.Moves = Console.ReadLine();
-      // Input Alias
-      List<string> list = [];
-      do
-      {
-        Console.WriteLine($"Enter Alias or (enter) to quit:");
-        string response = Console.ReadLine()!;
-        if (string.IsNullOrEmpty(response))
-        {
-          break;
-        }
-        list.Add(response);
-      } while (true);
-      streetFighter.Alias = list;
+      InputCharacter(streetFighter);
       // Add Character
       streetFighters.Add(streetFighter);
       File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
