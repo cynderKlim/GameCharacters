@@ -49,6 +49,7 @@ do
     Console.WriteLine("1) Display Mario Characters");
     Console.WriteLine("2) Add Mario Character");
     Console.WriteLine("3) Remove Mario Character");
+    Console.WriteLine("4) Edit Mario Characters");
     Console.WriteLine("Enter to quit");
 
     // input selection
@@ -100,6 +101,10 @@ do
         logger.Error("Invalid Id");
       }
     }
+    else if (choice == "4")
+    {
+      // Input Edit Function Here
+    }
     else if (string.IsNullOrEmpty(choice))
     {
       break;
@@ -114,6 +119,7 @@ do
     Console.WriteLine("1) Display Donkey Kong Characters");
     Console.WriteLine("2) Add Donkey Kong Character");
     Console.WriteLine("3) Remove Donkey Kong Character");
+    Console.WriteLine("4) Edit Donkey Kong Characters");
     Console.WriteLine("Enter to quit");
 
     // input selection
@@ -149,20 +155,26 @@ do
       if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
       {
         DonkeyKong? character = donkeyKongs.FirstOrDefault(c => c.Id == Id);
-       if (character == null)
-       {
-         logger.Error($"Character Id {Id} not found");
-       } else {
-         donkeyKongs.Remove(character);
-         // serialize list<dkCharacter> into json file
-         File.WriteAllText(dkFileName, JsonSerializer.Serialize(donkeyKongs));
-         logger.Info($"Character Id {Id} removed");
-       }
+        if (character == null)
+        {
+          logger.Error($"Character Id {Id} not found");
+        }
+        else
+        {
+          donkeyKongs.Remove(character);
+          // serialize list<dkCharacter> into json file
+          File.WriteAllText(dkFileName, JsonSerializer.Serialize(donkeyKongs));
+          logger.Info($"Character Id {Id} removed");
+        }
       }
       else
       {
         logger.Error("Invalid Id");
       }
+    }
+    else if (choice == "4")
+    {
+      // Input Edit Function Here
     }
     else if (string.IsNullOrEmpty(choice))
     {
@@ -178,6 +190,7 @@ do
     Console.WriteLine("1) Display Street Fighter II Characters");
     Console.WriteLine("2) Add Street Fighter II Character");
     Console.WriteLine("3) Remove Street Fighter II Character");
+    Console.WriteLine("4) Edit Street Fighet II Characters");
     Console.WriteLine("Enter to quit");
 
     // input selection
@@ -213,20 +226,26 @@ do
       if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
       {
         StreetFighterII? character = streetFighters.FirstOrDefault(c => c.Id == Id);
-       if (character == null)
-       {
-         logger.Error($"Character Id {Id} not found");
-       } else {
-         streetFighters.Remove(character);
-         // serialize list<sf2Characters> into json file
-         File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
-         logger.Info($"Character Id {Id} removed");
-       }
+        if (character == null)
+        {
+          logger.Error($"Character Id {Id} not found");
+        }
+        else
+        {
+          streetFighters.Remove(character);
+          // serialize list<sf2Characters> into json file
+          File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
+          logger.Info($"Character Id {Id} removed");
+        }
       }
       else
       {
         logger.Error("Invalid Id");
       }
+    }
+    else if (choice == "4")
+    {
+      // Input Edit Function Here
     }
     else if (string.IsNullOrEmpty(choice))
     {
