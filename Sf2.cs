@@ -1,9 +1,9 @@
 public class StreetFighterII : Character
 {
-  public List<string> Alias { get; set; } = [];
+  public List<string> Moves { get; set; } = [];
 
   public override string Display()
   {
-    return $"Id: {Id}\nName: {Name}\nDescription: {Description}\nMoves: {Moves}\nAlias: {string.Join(", ", Alias)}\n";
+    return $"Id: {Id}\nName: {Name}\nDescription: {Description}\nMoves: {string.Join(", ", Moves)}\n";
   }
 }
