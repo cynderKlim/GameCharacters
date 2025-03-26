@@ -153,7 +153,10 @@ do
        {
          logger.Error($"Character Id {Id} not found");
        } else {
-         logger.Info($"Character Id {Id} found");
+         donkeyKongs.Remove(character);
+         // serialize list<dkCharacter> into json file
+         File.WriteAllText(dkFileName, JsonSerializer.Serialize(donkeyKongs));
+         logger.Info($"Character Id {Id} removed");
        }
       }
       else
@@ -214,7 +217,10 @@ do
        {
          logger.Error($"Character Id {Id} not found");
        } else {
-         logger.Info($"Character Id {Id} found");
+         streetFighters.Remove(character);
+         // serialize list<sf2Characters> into json file
+         File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
+         logger.Info($"Character Id {Id} removed");
        }
       }
       else
