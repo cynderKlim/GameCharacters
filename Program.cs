@@ -122,42 +122,42 @@ do
 
     if (choice == "1")
     {
-      // Display Mario Characters
-      foreach (var c in marios)
+      // Display Donkey Kong Characters
+      foreach (var c in donkeyKongs)
       {
         Console.WriteLine(c.Display());
       }
     }
     else if (choice == "2")
     {
-      // Add Mario Character
+      // Add Donkey Kong Character
       // Generate unique Id
-      Mario mario = new()
+      DonkeyKong donkeyKong = new()
       {
-        Id = marios.Count == 0 ? 1 : marios.Max(c => c.Id) + 1
+        Id = donkeyKongs.Count == 0 ? 1 : donkeyKongs.Max(c => c.Id) + 1
       };
-      InputCharacter(mario);
+      InputCharacter(donkeyKong);
       // Add Character
-      marios.Add(mario);
-      File.WriteAllText(marioFileName, JsonSerializer.Serialize(marios));
-      logger.Info($"Character added: {mario.Name}");
+      donkeyKongs.Add(donkeyKong);
+      File.WriteAllText(dkFileName, JsonSerializer.Serialize(donkeyKongs));
+      logger.Info($"Character added: {donkeyKong.Name}");
     }
     else if (choice == "3")
     {
-      // Remove Mario Character
+      // Remove Donkey Kong Character
       Console.WriteLine("Enter the Id of the character to remove:");
       if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
       {
-        Mario? character = marios.FirstOrDefault(c => c.Id == Id);
+        DonkeyKong? character = donkeyKongs.FirstOrDefault(c => c.Id == Id);
         if (character == null)
         {
           logger.Error($"Character Id {Id} not found");
         }
         else
         {
-          marios.Remove(character);
-          // serialize list<marioCharacter> into json file
-          File.WriteAllText(marioFileName, JsonSerializer.Serialize(marios));
+          donkeyKongs.Remove(character);
+          // serialize list<dkCharacter> into json file
+          File.WriteAllText(dkFileName, JsonSerializer.Serialize(donkeyKongs));
           logger.Info($"Character Id {Id} removed");
         }
       }
