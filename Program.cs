@@ -148,8 +148,13 @@ do
       Console.WriteLine("Enter the Id of the character to remove:");
       if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
       {
-        logger.Info($"Character Id {Id} entered");
-        DonkeyKong? character = donkeyKongs.First(c => c.Id == Id);
+        DonkeyKong? character = donkeyKongs.FirstOrDefault(c => c.Id == Id);
+       if (character == null)
+       {
+         logger.Error($"Character Id {Id} not found");
+       } else {
+         logger.Info($"Character Id {Id} found");
+       }
       }
       else
       {
@@ -204,8 +209,13 @@ do
       Console.WriteLine("Enter the Id of the character to remove:");
       if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
       {
-        logger.Info($"Character Id {Id} entered");
-        StreetFighterII? character = streetFighters.First(c => c.Id == Id);
+        StreetFighterII? character = streetFighters.FirstOrDefault(c => c.Id == Id);
+       if (character == null)
+       {
+         logger.Error($"Character Id {Id} not found");
+       } else {
+         logger.Info($"Character Id {Id} found");
+       }
       }
       else
       {
