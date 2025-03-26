@@ -156,6 +156,10 @@ do
         list.Add(response);
       } while (true);
       donkeyKong.Alias = list;
+      // Add Character
+      donkeyKongs.Add(donkeyKong);
+      File.WriteAllText(dkFileName, JsonSerializer.Serialize(donkeyKongs));
+      logger.Info($"Character added: {donkeyKong.Name}");
     }
     else if (choice == "3")
     {
@@ -237,6 +241,10 @@ do
         list.Add(response);
       } while (true);
       streetFighter.Alias = list;
+      // Add Character
+      streetFighters.Add(streetFighter);
+      File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
+      logger.Info($"Character added: {streetFighter.Name}");
     }
     else if (choice == "3")
     {
