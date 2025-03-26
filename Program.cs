@@ -188,42 +188,42 @@ do
 
     if (choice == "1")
     {
-      // Display Mario Characters
-      foreach (var c in marios)
+      // Display Street Fighter II Characters
+      foreach (var c in streetFighters)
       {
         Console.WriteLine(c.Display());
       }
     }
     else if (choice == "2")
     {
-      // Add Mario Character
+      // Add Street Fighter II Character
       // Generate unique Id
-      Mario mario = new()
+      StreetFighterII streetFighter = new()
       {
-        Id = marios.Count == 0 ? 1 : marios.Max(c => c.Id) + 1
+        Id = streetFighters.Count == 0 ? 1 : streetFighters.Max(c => c.Id) + 1
       };
-      InputCharacter(mario);
+      InputCharacter(streetFighter);
       // Add Character
-      marios.Add(mario);
-      File.WriteAllText(marioFileName, JsonSerializer.Serialize(marios));
-      logger.Info($"Character added: {mario.Name}");
+      streetFighters.Add(streetFighter);
+      File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
+      logger.Info($"Character added: {streetFighter.Name}");
     }
     else if (choice == "3")
     {
-      // Remove Mario Character
+      // Remove Street Fighter II Character
       Console.WriteLine("Enter the Id of the character to remove:");
       if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
       {
-        Mario? character = marios.FirstOrDefault(c => c.Id == Id);
+        StreetFighterII? character = streetFighters.FirstOrDefault(c => c.Id == Id);
         if (character == null)
         {
           logger.Error($"Character Id {Id} not found");
         }
         else
         {
-          marios.Remove(character);
-          // serialize list<marioCharacter> into json file
-          File.WriteAllText(marioFileName, JsonSerializer.Serialize(marios));
+          streetFighters.Remove(character);
+          // serialize list<sf2Character> into json file
+          File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
           logger.Info($"Character Id {Id} removed");
         }
       }
