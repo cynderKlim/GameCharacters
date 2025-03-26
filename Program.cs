@@ -8,13 +8,13 @@ var logger = LogManager.Setup().LoadConfigurationFromFile(path).GetCurrentClassL
 
 logger.Info("Program started");
 
-// deserialize jsons from file into List(s)<>
+// deserialize json from files into List(s)<>
 string marioFileName = "mario.json";
 List<Mario> marios = [];
 string dkFileName = "dk.json";
-List<DonkeyKong> donkeyKongs = [];
+List<DonkeyKong> donkeyKongs = JsonSerializer.Deserialize<List<DonkeyKong>>(File.ReadAllText(dkFileName))!;
 string sf2FileName = "sf2.json";
-List<StreetFighterII> streetFighters = [];
+List<StreetFighterII> streetFighters = JsonSerializer.Deserialize<List<StreetFighterII>>(File.ReadAllText(sf2FileName))!;
 
 // check if file exists
 if (File.Exists(marioFileName) && File.Exists(dkFileName) && File.Exists(sf2FileName))
@@ -136,11 +136,13 @@ do
       {
         Id = donkeyKongs.Count == 0 ? 1 : donkeyKongs.Max(c => c.Id) + 1
       };
-      InputCharacter(donkeyKong);
-      // Add Character
-      donkeyKongs.Add(donkeyKong);
-      File.WriteAllText(dkFileName, JsonSerializer.Serialize(donkeyKongs));
-      logger.Info($"Character added: {donkeyKong.Name}");
+      // Input Species, Name, Description
+      Console.WriteLine("Enter Species: ");
+      donkeyKong.Species = Console.ReadLine();
+      Console.WriteLine("Enter Name: ");
+      donkeyKong.Name = Console.ReadLine();
+      Console.WriteLine("Enter Description: ");
+      donkeyKong.Description = Console.ReadLine();
     }
     else if (choice == "3")
     {
@@ -202,11 +204,13 @@ do
       {
         Id = streetFighters.Count == 0 ? 1 : streetFighters.Max(c => c.Id) + 1
       };
-      InputCharacter(streetFighter);
-      // Add Character
-      streetFighters.Add(streetFighter);
-      File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
-      logger.Info($"Character added: {streetFighter.Name}");
+      // Input Name, Description
+      Console.WriteLine("Enter Name: ");
+      streetFighter.Name = Console.ReadLine();
+      Console.WriteLine("Enter Description: ");
+      streetFighter.Description = Console.ReadLine();
+      Console.WriteLine("Enter Moves separated by commas: ");
+      streetFighter.Moves = Console.ReadLine();
     }
     else if (choice == "3")
     {
