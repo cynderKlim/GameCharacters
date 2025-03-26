@@ -146,12 +146,15 @@ do
     {
       // Remove Donkey Kong Character
       Console.WriteLine("Enter the Id of the character to remove:");
-     if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
-     {
-       logger.Info($"Character Id {Id} entered");
-     } else {
-       logger.Error("Invalid Id");
-     }
+      if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
+      {
+        logger.Info($"Character Id {Id} entered");
+        DonkeyKong? character = donkeyKongs.First(c => c.Id == Id);
+      }
+      else
+      {
+        logger.Error("Invalid Id");
+      }
     }
     else if (string.IsNullOrEmpty(choice))
     {
@@ -199,12 +202,15 @@ do
     {
       // Remove Street Fighter II Character
       Console.WriteLine("Enter the Id of the character to remove:");
-     if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
-     {
-       logger.Info($"Character Id {Id} entered");
-     } else {
-       logger.Error("Invalid Id");
-     }
+      if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
+      {
+        logger.Info($"Character Id {Id} entered");
+        StreetFighterII? character = streetFighters.First(c => c.Id == Id);
+      }
+      else
+      {
+        logger.Error("Invalid Id");
+      }
     }
     else if (string.IsNullOrEmpty(choice))
     {
