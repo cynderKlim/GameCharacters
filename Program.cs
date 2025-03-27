@@ -103,7 +103,26 @@ do
     }
     else if (choice == "4")
     {
-      // Input Edit Function Here
+      Console.WriteLine("Enter the Id of the character to edit:");
+      if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
+      {
+        int character = marios.FindIndex(c => c.Id == Id);
+        if (character < 0 || character >= marios.Count)
+        {
+          logger.Error($"Character Id {Id} not found");
+        }
+        else
+        {
+          InputCharacter(marios[character]);
+          // serialize list<dkCharacter> into json file
+          File.WriteAllText(marioFileName, JsonSerializer.Serialize(marios));
+          logger.Info($"Character Id {Id} edited");
+        }
+      }
+      else
+      {
+        logger.Error("Invalid Id");
+      }
     }
     else if (string.IsNullOrEmpty(choice))
     {
@@ -174,7 +193,26 @@ do
     }
     else if (choice == "4")
     {
-      // Input Edit Function Here
+      Console.WriteLine("Enter the Id of the character to edit:");
+      if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
+      {
+        int character = donkeyKongs.FindIndex(c => c.Id == Id);
+        if (character < 0 || character >= donkeyKongs.Count)
+        {
+          logger.Error($"Character Id {Id} not found");
+        }
+        else
+        {
+          InputCharacter(donkeyKongs[character]);
+          // serialize list<dkCharacter> into json file
+          File.WriteAllText(dkFileName, JsonSerializer.Serialize(donkeyKongs));
+          logger.Info($"Character Id {Id} edited");
+        }
+      }
+      else
+      {
+        logger.Error("Invalid Id");
+      }
     }
     else if (string.IsNullOrEmpty(choice))
     {
@@ -245,7 +283,44 @@ do
     }
     else if (choice == "4")
     {
-      // Input Edit Function Here
+      Console.WriteLine("Enter the Id of the character to edit:");
+      if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
+      {
+        int index = streetFighters.FindIndex(c => c.Id == Id);
+        if (index < 0 || index >= streetFighters.Count)
+        {
+          logger.Error($"Character Id {Id} not found");
+        }
+        else
+        {
+          var character = streetFighters[index - 1];
+          Console.WriteLine(character.Display());
+          Console.WriteLine($"Editing for {streetFighters[index].Name}");
+
+          InputCharacter(streetFighters[index]);
+          Console.WriteLine("Enter new Name (or press Enter to keep current):");
+            string? newName = Console.ReadLine();
+            if (!string.IsNullOrEmpty(newName))
+            {
+                character.Name = newName;
+            }
+
+            Console.WriteLine("Enter new Abilities (comma-separated, or press Enter to keep current):");
+            string? newMoves = Console.ReadLine();
+            if (!string.IsNullOrEmpty(newMoves))
+            {
+                character.Moves = newMoves.Split(',').Select(a => a.Trim()).ToList();
+            }
+
+            // Serialize updated list into JSON file
+            File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
+            logger.Info($"Character Id {Id} updated");
+        }
+      }
+      else
+      {
+        logger.Error("Invalid Id");
+      }
     }
     else if (string.IsNullOrEmpty(choice))
     {
