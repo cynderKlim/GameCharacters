@@ -299,22 +299,29 @@ do
 
           InputCharacter(streetFighters[index]);
           Console.WriteLine("Enter new Name (or press Enter to keep current):");
-            string? newName = Console.ReadLine();
-            if (!string.IsNullOrEmpty(newName))
-            {
-                character.Name = newName;
-            }
+          string? newName = Console.ReadLine();
+          if (!string.IsNullOrEmpty(newName))
+          {
+            character.Name = newName;
+          }
 
-            Console.WriteLine("Enter new Abilities (comma-separated, or press Enter to keep current):");
-            string? newMoves = Console.ReadLine();
-            if (!string.IsNullOrEmpty(newMoves))
-            {
-                character.Moves = newMoves.Split(',').Select(a => a.Trim()).ToList();
-            }
+          Console.WriteLine("Enter new Description (or press Enter to keep current):");
+          string? newDescription = Console.ReadLine();
+          if (!string.IsNullOrEmpty(newDescription))
+          {
+            character.Description = newDescription;
+          }
+          
+          Console.WriteLine("Enter new Moves (comma-separated, or press Enter to keep current):");
+          string? newMoves = Console.ReadLine();
+          if (!string.IsNullOrEmpty(newMoves))
+          {
+            character.Moves = newMoves.Split(',').Select(a => a.Trim()).ToList();
+          }
 
-            // Serialize updated list into JSON file
-            File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
-            logger.Info($"Character Id {Id} updated");
+          // Serialize updated list into JSON file
+          File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
+          logger.Info($"Character Id {Id} updated");
         }
       }
       else
