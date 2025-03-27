@@ -196,17 +196,43 @@ do
       Console.WriteLine("Enter the Id of the character to edit:");
       if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
       {
-        int character = donkeyKongs.FindIndex(c => c.Id == Id);
-        if (character < 0 || character >= donkeyKongs.Count)
+        int index = donkeyKongs.FindIndex(c => c.Id == Id);
+        if (index < 0 || index >= donkeyKongs.Count)
         {
           logger.Error($"Character Id {Id} not found");
         }
         else
         {
-          InputCharacter(donkeyKongs[character]);
-          // serialize list<dkCharacter> into json file
-          File.WriteAllText(dkFileName, JsonSerializer.Serialize(donkeyKongs));
-          logger.Info($"Character Id {Id} edited");
+          var character = donkeyKongs[index - 1];
+          Console.WriteLine(character.Display());
+          Console.WriteLine($"Editing for {donkeyKongs[index].Name}");
+
+          InputCharacter(donkeyKongs[index]);
+
+          Console.WriteLine("Enter new Species (or press Enter to keep current): ");
+          string? newSpecies = Console.ReadLine();
+          if (!string.IsNullOrEmpty(newSpecies))
+          {
+            character.Species = newSpecies;
+          }
+
+          Console.WriteLine("Enter new Name (or press Enter to keep current): ");
+          string? newName = Console.ReadLine();
+          if (!string.IsNullOrEmpty(newName))
+          {
+            character.Name = newName;
+          }
+
+          Console.WriteLine("Enter new Description (or press Enter to keep current): ");
+          string? newDescription = Console.ReadLine();
+          if (!string.IsNullOrEmpty(newDescription))
+          {
+            character.Description = newDescription;
+          }
+
+          // Serialize updated list into JSON file
+          File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
+          logger.Info($"Character Id {Id} updated");
         }
       }
       else
@@ -260,7 +286,7 @@ do
     else if (choice == "3")
     {
       // Remove Street Fighter II Character
-      Console.WriteLine("Enter the Id of the character to remove:");
+      Console.WriteLine("Enter the Id of the character to remove: ");
       if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
       {
         StreetFighterII? character = streetFighters.FirstOrDefault(c => c.Id == Id);
@@ -283,7 +309,7 @@ do
     }
     else if (choice == "4")
     {
-      Console.WriteLine("Enter the Id of the character to edit:");
+      Console.WriteLine("Enter the Id of the character to edit: ");
       if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
       {
         int index = streetFighters.FindIndex(c => c.Id == Id);
@@ -298,21 +324,21 @@ do
           Console.WriteLine($"Editing for {streetFighters[index].Name}");
 
           InputCharacter(streetFighters[index]);
-          Console.WriteLine("Enter new Name (or press Enter to keep current):");
+          Console.WriteLine("Enter new Name (or press Enter to keep current): ");
           string? newName = Console.ReadLine();
           if (!string.IsNullOrEmpty(newName))
           {
             character.Name = newName;
           }
 
-          Console.WriteLine("Enter new Description (or press Enter to keep current):");
+          Console.WriteLine("Enter new Description (or press Enter to keep current): ");
           string? newDescription = Console.ReadLine();
           if (!string.IsNullOrEmpty(newDescription))
           {
             character.Description = newDescription;
           }
-          
-          Console.WriteLine("Enter new Moves (comma-separated, or press Enter to keep current):");
+
+          Console.WriteLine("Enter new Moves (comma-separated, or press Enter to keep current): ");
           string? newMoves = Console.ReadLine();
           if (!string.IsNullOrEmpty(newMoves))
           {
