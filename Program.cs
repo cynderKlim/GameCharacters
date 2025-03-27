@@ -43,7 +43,10 @@ do
   string? choice = Console.ReadLine();
   logger.Info("User choice: {Choice}", choice);
 
-  if (choice == "1")
+  if (string.IsNullOrEmpty(choice)){
+    break;
+  }
+  else if (choice == "1")
   {
     // display choices to user
     Console.WriteLine("1) Display Mario Characters");
@@ -106,17 +109,20 @@ do
       Console.WriteLine("Enter the Id of the character to edit:");
       if (UInt32.TryParse(Console.ReadLine(), out UInt32 Id))
       {
-        int character = marios.FindIndex(c => c.Id == Id);
-        if (character < 0 || character >= marios.Count)
+        int index = donkeyKongs.FindIndex(c => c.Id == Id);
+        if (index < 0 || index >= donkeyKongs.Count)
         {
           logger.Error($"Character Id {Id} not found");
         }
         else
         {
-          InputCharacter(marios[character]);
-          // serialize list<dkCharacter> into json file
+          var character = marios[index - 1];
+          Console.WriteLine($"Editing for {marios[index].Name}");
+
+          InputCharacter(marios[index]);
+          // Serialize updated list into JSON file
           File.WriteAllText(marioFileName, JsonSerializer.Serialize(marios));
-          logger.Info($"Character Id {Id} edited");
+          logger.Info($"Character Id {Id} updated");
         }
       }
       else
@@ -204,34 +210,11 @@ do
         else
         {
           var character = donkeyKongs[index - 1];
-          Console.WriteLine(character.Display());
           Console.WriteLine($"Editing for {donkeyKongs[index].Name}");
 
           InputCharacter(donkeyKongs[index]);
-
-          Console.WriteLine("Enter new Species (or press Enter to keep current): ");
-          string? newSpecies = Console.ReadLine();
-          if (!string.IsNullOrEmpty(newSpecies))
-          {
-            character.Species = newSpecies;
-          }
-
-          Console.WriteLine("Enter new Name (or press Enter to keep current): ");
-          string? newName = Console.ReadLine();
-          if (!string.IsNullOrEmpty(newName))
-          {
-            character.Name = newName;
-          }
-
-          Console.WriteLine("Enter new Description (or press Enter to keep current): ");
-          string? newDescription = Console.ReadLine();
-          if (!string.IsNullOrEmpty(newDescription))
-          {
-            character.Description = newDescription;
-          }
-
           // Serialize updated list into JSON file
-          File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
+          File.WriteAllText(dkFileName, JsonSerializer.Serialize(donkeyKongs));
           logger.Info($"Character Id {Id} updated");
         }
       }
@@ -320,31 +303,9 @@ do
         else
         {
           var character = streetFighters[index - 1];
-          Console.WriteLine(character.Display());
           Console.WriteLine($"Editing for {streetFighters[index].Name}");
 
           InputCharacter(streetFighters[index]);
-          Console.WriteLine("Enter new Name (or press Enter to keep current): ");
-          string? newName = Console.ReadLine();
-          if (!string.IsNullOrEmpty(newName))
-          {
-            character.Name = newName;
-          }
-
-          Console.WriteLine("Enter new Description (or press Enter to keep current): ");
-          string? newDescription = Console.ReadLine();
-          if (!string.IsNullOrEmpty(newDescription))
-          {
-            character.Description = newDescription;
-          }
-
-          Console.WriteLine("Enter new Moves (comma-separated, or press Enter to keep current): ");
-          string? newMoves = Console.ReadLine();
-          if (!string.IsNullOrEmpty(newMoves))
-          {
-            character.Moves = newMoves.Split(',').Select(a => a.Trim()).ToList();
-          }
-
           // Serialize updated list into JSON file
           File.WriteAllText(sf2FileName, JsonSerializer.Serialize(streetFighters));
           logger.Info($"Character Id {Id} updated");
